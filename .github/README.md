@@ -1,23 +1,23 @@
 <h1 align="center">WireGuard Manager 👋</h1>
 <p align="center">
-  <a href="https://github.com/complexorganizations/wireguard-manager/releases">
-    <img alt="Release" src="https://img.shields.io/github/v/release/complexorganizations/wireguard-manager" target="_blank" />
-  </a>
-  <a href="https://github.com/complexorganizations/wireguard-manager/actions">
-    <img alt="ShellCheck" src="https://github.com/complexorganizations/wireguard-manager/workflows/ShellCheck/badge.svg" target="_blank" />
-  </a>
-  <a href="https://github.com/complexorganizations/wireguard-manager/issues">
-    <img alt="Issues" src="https://img.shields.io/github/issues/complexorganizations/wireguard-manager" target="_blank" />
-  </a>
-  <a href="https://github.com/sponsors/Prajwal-Koirala">
-    <img alt="Sponsors" src="https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub" target="_blank" />
-  </a>
-  <a href="https://raw.githubusercontent.com/complexorganizations/wireguard-manager/main/.github/LICENSE">
-    <img alt="PullRequest" src="https://img.shields.io/github/issues-pr/complexorganizations/wireguard-manager" target="_blank" />
-  </a>
-  <a href="https://raw.githubusercontent.com/complexorganizations/wireguard-manager/main/.github/LICENSE">
-    <img alt="License" src="https://img.shields.io/github/license/complexorganizations/wireguard-manager" target="_blank" />
-  </a>
+	<a href="https://github.com/complexorganizations/wireguard-manager/releases">
+		<img alt="Release" src="https://img.shields.io/github/v/release/complexorganizations/wireguard-manager" target="_blank" />
+	</a>
+	<a href="https://github.com/complexorganizations/wireguard-manager/actions">
+		<img alt="ShellCheck" src="https://github.com/complexorganizations/wireguard-manager/workflows/ShellCheck/badge.svg" target="_blank" />
+	</a>
+	<a href="https://github.com/complexorganizations/wireguard-manager/issues">
+		<img alt="Issues" src="https://img.shields.io/github/issues/complexorganizations/wireguard-manager" target="_blank" />
+	</a>
+	<a href="https://github.com/sponsors/Prajwal-Koirala">
+		<img alt="Sponsors" src="https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub" target="_blank" />
+	</a>
+	<a href="https://github.com/complexorganizations/gocreate/pulls">
+		<img alt="PullRequest" src="https://img.shields.io/github/issues-pr/complexorganizations/wireguard-manager" target="_blank" />
+	</a>
+	<a href="https://raw.githubusercontent.com/complexorganizations/wireguard-manager/main/.github/LICENSE">
+		<img alt="License" src="https://img.shields.io/github/license/complexorganizations/wireguard-manager" target="_blank" />
+	</a>
 </p>
 
 ---
@@ -36,26 +36,33 @@ WireGuard is a straightforward yet fast and modern VPN that utilizes state-of-th
 
 ---
 ### 🌲 Prerequisite
-- CentOS, Debian, Ubuntu, Arch, Fedora, Redhat, Raspbian, PopOS, Manjaro
+- CentOS, Debian, Ubuntu, Arch, Fedora, Redhat, Raspbian, PopOS, Manjaro, Kali, Alpine, Mint, FreeBSD
 - Linux `Kernel 3.1` or newer
 - You will need superuser access or a user account with `sudo` privilege.
 - Docker `Kernel 5.6` or newer
 
 ---
 ### 📲 Installation
+#### Instance Installation
 Lets first use `curl` and save the file in `/usr/local/bin/`
 ```
-curl https://raw.githubusercontent.com/complexorganizations/wireguard-manager/main/wireguard-server.sh --create-dirs -o /usr/local/bin/wireguard-server.sh
+curl https://raw.githubusercontent.com/complexorganizations/wireguard-manager/main/wireguard-manager.sh --create-dirs -o /usr/local/bin/wireguard-manager.sh
 ```
 Then let's make the script user executable (Optional)
 ```
-chmod +x /usr/local/bin/wireguard-server.sh
+chmod +x /usr/local/bin/wireguard-manager.sh
 ```
 It's finally time to execute the script
 ```
-bash /usr/local/bin/wireguard-server.sh
+bash /usr/local/bin/wireguard-manager.sh
 ```
-In your `/etc/wireguard/clients` directory, you will have `.conf` files. These are the client configuration files. Download them from your WireGuard Interface and connect using your favorite WireGuard Peer.
+
+In your `/etc/wireguard/clients` directory, you will have `.conf` files. These are the peer configuration files. Download them from your WireGuard Interface and connect using your favorite WireGuard Peer.
+
+#### Docker Installation
+```
+docker build -t wireguard https://raw.githubusercontent.com/complexorganizations/wireguard-manager/main/Dockerfile
+```
 
 ---
 ### 💣 After Installation
@@ -67,11 +74,13 @@ In your `/etc/wireguard/clients` directory, you will have `.conf` files. These a
 - Remove WireGuard Peer
 - Uninstall WireGuard Interface
 - Update this script
+- Backup WireGuard Configs
+- Restore WireGuard Configs
 
 ---
 ### 🔑 Usage
 ```
-usage: ./wireguard-server.sh <command>
+usage: ./wireguard-manager.sh <command>
   --install     Install WireGuard Interface
   --start       Start WireGuard Interface
   --stop        Stop WireGuard Interface
@@ -82,20 +91,21 @@ usage: ./wireguard-server.sh <command>
   --reinstall   Reinstall WireGuard Interface
   --uninstall   Uninstall WireGuard Interface
   --update      Update WireGuard Script
+  --backup      Backup WireGuard Configs
+  --restore     Restore WireGuard Configs
   --help        Show Usage Guide
 ```
 
 ---
 ### 🥰 Features
-- Installs and configures a ready-to-use WireGuard Interface
-- (IPv4|IPv6) Supported, (IPv4|IPv6) Leak Protection
+- Install & Configure WireGuard Interface
+- Backup & Restore WireGuard
+- (IPv4|IPv6) Supported, Leak Protection
+- Variety of Public DNS to be pushed to the peers
+- Choice to use a self-hosted resolver with Unbound **Prevent DNS Leaks, DNSSEC Supported**
 - Iptables rules and forwarding managed in a seamless way
-- If needed, the script can cleanly remove WireGuard, including configuration and iptables rules
-- Variety of DNS resolvers to be pushed to the clients
-- The choice to use a self-hosted resolver with Unbound.
-- Preshared-key for an extra layer of security.
-- Block DNS leaks
-- Dynamic DNS supported
+- Remove & Unistall WireGuard Interface
+- Preshared-key for an extra layer of security. **Required**
 - Many other little things!
 
 ---
@@ -120,30 +130,25 @@ usage: ./wireguard-server.sh <command>
 
 ---
 ### 👉👈 Compatibility with Linux Distro
-| OS              | Supported          | i386               | amd64              | armhf              | arm64              |
-| --------------  | ------------------ | ------------------ | ------------------ | ------------------ | ------------------ |
-| Ubuntu 14 ≤     |:x:                 |:x:                 |:x:                 |:x:                 |:x:                 |
-| Ubuntu 16       |:heavy_check_mark:  |:heavy_check_mark:  |:heavy_check_mark:  |:heavy_check_mark:  |:heavy_check_mark:  |
-| Ubuntu 18       |:heavy_check_mark:  |:heavy_check_mark:  |:heavy_check_mark:  |:heavy_check_mark:  |:heavy_check_mark:  |
-| Ubuntu 19 ≥     |:heavy_check_mark:  |:heavy_check_mark:  |:heavy_check_mark:  |:heavy_check_mark:  |:heavy_check_mark:  |
-| Debian 7 ≤      |:x:                 |:x:                 |:x:                 |:x:                 |:x:                 |
-| Debian 8        |:heavy_check_mark:  |:heavy_check_mark:  |:heavy_check_mark:  |:heavy_check_mark:  |:heavy_check_mark:  |
-| Debian 9        |:heavy_check_mark:  |:heavy_check_mark:  |:heavy_check_mark:  |:heavy_check_mark:  |:heavy_check_mark:  |
-| Debian 10 ≥     |:heavy_check_mark:  |:heavy_check_mark:  |:heavy_check_mark:  |:heavy_check_mark:  |:heavy_check_mark:  |
-| CentOS 6 ≤      |:x:                 |:x:                 |:x:                 |:x:                 |:x:                 |
-| CentOS 7        |:heavy_check_mark:  |:heavy_check_mark:  |:heavy_check_mark:  |:heavy_check_mark:  |:heavy_check_mark:  |
-| CentOS 8 ≥      |:heavy_check_mark:  |:heavy_check_mark:  |:heavy_check_mark:  |:heavy_check_mark:  |:heavy_check_mark:  |
-| Fedora 29 ≤     |:x:                 |:x:                 |:x:                 |:x:                 |:x:                 |
-| Fedora 30       |:heavy_check_mark:  |:heavy_check_mark:  |:heavy_check_mark:  |:heavy_check_mark:  |:heavy_check_mark:  |
-| Fedora 31       |:heavy_check_mark:  |:heavy_check_mark:  |:heavy_check_mark:  |:heavy_check_mark:  |:heavy_check_mark:  |
-| Fedora 32 ≥     |:heavy_check_mark:  |:heavy_check_mark:  |:heavy_check_mark:  |:heavy_check_mark:  |:heavy_check_mark:  |
-| RedHat 6 ≤      |:x:                 |:x:                 |:x:                 |:x:                 |:x:                 |
-| RedHat 7        |:heavy_check_mark:  |:heavy_check_mark:  |:heavy_check_mark:  |:heavy_check_mark:  |:heavy_check_mark:  |
-| RedHat 8 ≥      |:heavy_check_mark:  |:heavy_check_mark:  |:heavy_check_mark:  |:heavy_check_mark:  |:heavy_check_mark:  |
-| Arch            |:heavy_check_mark:  |:heavy_check_mark:  |:heavy_check_mark:  |:heavy_check_mark:  |:heavy_check_mark:  |
-| Raspbian        |:heavy_check_mark:  |:heavy_check_mark:  |:heavy_check_mark:  |:heavy_check_mark:  |:heavy_check_mark:  |
-| PopOS           |:heavy_check_mark:  |:heavy_check_mark:  |:heavy_check_mark:  |:heavy_check_mark:  |:heavy_check_mark:  |
-| Manjaro         |:heavy_check_mark:  |:heavy_check_mark:  |:heavy_check_mark:  |:heavy_check_mark:  |:heavy_check_mark:  |
+| OS              | i386               | amd64              | armhf              | arm64              |
+| --------------  | ------------------ | ------------------ | ------------------ | ------------------ |
+| Ubuntu 14 ≤     |:x:                 |:x:                 |:x:                 |:x:                 |
+| Ubuntu 16 ≥     |:heavy_check_mark:  |:heavy_check_mark:  |:heavy_check_mark:  |:heavy_check_mark:  |
+| Debian 7 ≤      |:x:                 |:x:                 |:x:                 |:x:                 |
+| Debian 8 ≥      |:heavy_check_mark:  |:heavy_check_mark:  |:heavy_check_mark:  |:heavy_check_mark:  |
+| CentOS 6 ≤      |:x:                 |:x:                 |:x:                 |:x:                 |
+| CentOS 7 ≥      |:heavy_check_mark:  |:heavy_check_mark:  |:heavy_check_mark:  |:heavy_check_mark:  |
+| Fedora 29 ≤     |:x:                 |:x:                 |:x:                 |:x:                 |
+| Fedora 30 ≥     |:heavy_check_mark:  |:heavy_check_mark:  |:heavy_check_mark:  |:heavy_check_mark:  |
+| RedHat 6 ≤      |:x:                 |:x:                 |:x:                 |:x:                 |
+| RedHat 7 ≥      |:heavy_check_mark:  |:heavy_check_mark:  |:heavy_check_mark:  |:heavy_check_mark:  |
+| Kali 1.0 ≤      |:x:                 |:x:                 |:x:                 |:x:                 |
+| Kali 1.1 ≥      |:heavy_check_mark:  |:heavy_check_mark:  |:heavy_check_mark:  |:heavy_check_mark:  |
+| Arch            |:heavy_check_mark:  |:heavy_check_mark:  |:heavy_check_mark:  |:heavy_check_mark:  |
+| Raspbian        |:heavy_check_mark:  |:heavy_check_mark:  |:heavy_check_mark:  |:heavy_check_mark:  |
+| PopOS           |:heavy_check_mark:  |:heavy_check_mark:  |:heavy_check_mark:  |:heavy_check_mark:  |
+| Manjaro         |:heavy_check_mark:  |:heavy_check_mark:  |:heavy_check_mark:  |:heavy_check_mark:  |
+| Mint            |:heavy_check_mark:  |:heavy_check_mark:  |:heavy_check_mark:  |:heavy_check_mark:  |
 
 ### ☁️ Compatibility with Cloud Providers
 | Cloud           | Supported          |
@@ -170,15 +175,12 @@ usage: ./wireguard-server.sh <command>
 | Docker          |:heavy_check_mark:  |
 
 ### 💻 Compatibility with Linux Kernel
-| Kernel          | Supported          |
-| --------------  | ------------------ |
-| Kernel 5.4 ≥    |:heavy_check_mark:  |
-| Kernel 4.19     |:heavy_check_mark:  |
-| Kernel 4.14     |:heavy_check_mark:  |
-| Kernel 4.9      |:heavy_check_mark:  |
-| Kernel 4.4      |:heavy_check_mark:  |
-| Kernel 3.16     |:heavy_check_mark:  |
-| Kernel 3.1 ≤    |:x:                 |
+| Kernel                 | Supported              |
+| ---------------------  | ---------------------  |
+| Linux Kernel 3.0 ≤     |:x:                     |
+| Linux Kernel 3.1 ≥     |:heavy_check_mark:      |
+| Docker Kernel 5.5 ≤    |:x:                     |
+| Docker Kernel 5.6 ≥    |:heavy_check_mark:      |
 
 ---
 ### 🙋 Q&A
@@ -197,8 +199,11 @@ Which WireGuard client do you recommend?
 Is there WireGuard documentation?
 - Yes, please head to the [WireGuard Manual](https://www.wireguard.com), which references all the options.
 
-How do I install a wireguard without the questions? (Headless Install) ***Server Only***
-- ```HEADLESS_INSTALL=y /usr/local/bin/wireguard-server.sh```
+How do I install a wireguard without the questions? (Headless Install)
+- ```./wireguard-manager.sh --install```
+
+Is there any alternative to wireguard?
+- [ShadowSocks](https://github.com/complexorganizations/shadowsocks-manager)
 
 Official Links
 - Homepage: https://www.wireguard.com
@@ -209,7 +214,7 @@ Official Links
 
 ---
 ### 📐 Architecture
-![image](https://user-images.githubusercontent.com/16564273/80664029-a6059300-8a63-11ea-867b-4f399eabcaaf.png)
+![image](https://user-images.githubusercontent.com/16564273/103967799-bb71a780-5130-11eb-8462-69e728e1fd95.png)
 
 ---
 ### 🤝 Developing
@@ -220,12 +225,11 @@ Using a browser based development environment:
 ### 🐛 Debugging
 ```
 git clone https://github.com/complexorganizations/wireguard-manager /usr/local/bin/
-bash -x /usr/local/bin/wireguard-(server|client).sh >> /usr/local/bin/wireguard-(server|client).log
+bash -x /usr/local/bin/wireguard-manager.sh >> /usr/local/bin/wireguard-manager.log
 ```
 
 ---
 ### 👤 Author
-
 * Name: Prajwal Koirala
 * Website: [prajwalkoirala.com](https://www.prajwalkoirala.com)
 * Github: [@prajwal-koirala](https://github.com/prajwal-koirala)
@@ -236,13 +240,12 @@ bash -x /usr/local/bin/wireguard-(server|client).sh >> /usr/local/bin/wireguard-
 
 ---
 ### ⛑️ Support
-
 Give a ⭐️ and 🍴 if this project helped you!
 
 <p align="center">
-<a href="https://github.com/sponsors/Prajwal-Koirala">
-  <img alt="Sponsors" src="https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub" target="_blank" />
-</a>
+	<a href="https://github.com/sponsors/Prajwal-Koirala">
+		<img alt="Sponsors" src="https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub" target="_blank" />
+	</a>
 </p>
 
 - BCH : `qzq9ae4jlewtz7v7mn4tv7kav3dc9rvjwsg5f36099`
@@ -254,13 +257,12 @@ Give a ⭐️ and 🍴 if this project helped you!
 - LTC : `MVwkmnnaLDq7UccDeudcpQYwFnnDwDxxmq`
 - XRP : `rw2ciyaNshpHe7bCHo4bRWq6pqqynnWKQg (1790476900)`
 
----
+---	
 ### ❤️ Credits
-[Angristan](https://raw.githubusercontent.com/angristan/wireguard-install/master/LICENSE)
-[l-n-s](https://raw.githubusercontent.com/l-n-s/wireguard-install/master/LICENSE)
+Open Source Community
 
 ---
 ### 📝 License
 Copyright © 2020 [Prajwal](https://github.com/prajwal-koirala)
 
-This project is [MIT](https://raw.githubusercontent.com/complexorganizations/wireguard-manager/main/.github/LICENSE) licensed
+This project is [unlicensed](https://raw.githubusercontent.com/complexorganizations/wireguard-manager/main/.github/LICENSE)
