@@ -1,4 +1,4 @@
-<h1 align="center">WireGuard Manager 👋</h1>
+<h1 align="center">WireGuard-Manager 👋</h1>
 <p align="center">
 	<a href="https://github.com/complexorganizations/wireguard-manager/releases">
 		<img alt="Release" src="https://img.shields.io/github/v/release/complexorganizations/wireguard-manager" target="_blank" />
@@ -12,7 +12,7 @@
 	<a href="https://github.com/sponsors/Prajwal-Koirala">
 		<img alt="Sponsors" src="https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub" target="_blank" />
 	</a>
-	<a href="https://github.com/complexorganizations/gocreate/pulls">
+	<a href="https://github.com/complexorganizations/wireguard-manager/pulls">
 		<img alt="PullRequest" src="https://img.shields.io/github/issues-pr/complexorganizations/wireguard-manager" target="_blank" />
 	</a>
 	<a href="https://raw.githubusercontent.com/complexorganizations/wireguard-manager/main/.github/LICENSE">
@@ -25,7 +25,7 @@
 A Virtual Private Network (VPN) allows users to send and receive data through shared or public networks as if their computing devices were directly connected to the private network. Thus, applications running on an end-system (PC, smartphone, etc.) over a VPN may benefit from individual network features, protection, and management. Encryption is a standard aspect of a VPN connection but not an intrinsic one.
 
 ### 📶 What is WireGuard❓
-WireGuard is a straightforward yet fast and modern VPN that utilizes state-of-the-art cryptography. It aims to be faster, simpler, leaner, and more useful than IPsec while avoiding the massive headache. It intends to be considerably more performant than OpenVPN. WireGuard is designed as a general-purpose VPN for running on embedded interfaces and super computers alike, fit for many different circumstances. Initially released for the Linux kernel, it is now cross-platform (Windows, macOS, BSD, iOS, Android) and widely deployable. It is currently under a massive development, but it already might be regarded as the most secure, most comfortable to use, and the simplest VPN solution in the industry.
+WireGuard is a straightforward yet fast and modern VPN that utilizes state-of-the-art cryptography. It aims to be faster, simpler, leaner, and more useful than IPsec while avoiding the massive headache. It intends to be considerably more performant than OpenVPN. WireGuard is designed as a general-purpose VPN for running on embedded interfaces and super computers alike, fit for many circumstances. Initially released for the Linux kernel, it is now cross-platform (Windows, macOS, BSD, iOS, Android) and widely deployable. It is currently under a massive development, but it already might be regarded as the most secure, most comfortable to use, and the simplest VPN solution in the industry.
 
 ### ⛳ Goals
  - robust and modern security by default
@@ -74,7 +74,7 @@ docker build -t wireguard https://raw.githubusercontent.com/complexorganizations
 - Remove WireGuard Peer
 - Uninstall WireGuard Interface
 - Update this script
-- Backup WireGuard Configs
+- Encrypt & Backup Configs
 - Restore WireGuard Configs
 
 ---
@@ -104,7 +104,7 @@ usage: ./wireguard-manager.sh <command>
 - Variety of Public DNS to be pushed to the peers
 - Choice to use a self-hosted resolver with Unbound **Prevent DNS Leaks, DNSSEC Supported**
 - Iptables rules and forwarding managed in a seamless way
-- Remove & Unistall WireGuard Interface
+- Remove & Uninstall WireGuard Interface
 - Preshared-key for an extra layer of security. **Required**
 - Many other little things!
 
@@ -121,8 +121,6 @@ usage: ./wireguard-manager.sh <command>
 * `NAT_CHOICE` - Keep sending packets to keep the tunnel alive `25`
 * `INSTALL_UNBOUND` - Install unbound with a basic `y/n`
 * `UNINSTALL_UNBOUND` - Uninstall unbound with `y/n`
-* `INSTALL_PIHOLE` - Install PiHole with a `y/n`
-* `UNINSTALL_PIHOLE` - Uninstall PiHole with `y/n`
 * `REMOVE_WIREGUARD` - Uninstall WireGuard with `y/n`
 * `DNS_CHOICE` - Without Unbound you have to use a public dns like `8.8.8.8`
 * `CLIENT_NAME` - Name the first peer from wireguard
@@ -204,6 +202,12 @@ How do I install a wireguard without the questions? (Headless Install)
 
 Is there any alternative to wireguard?
 - [ShadowSocks](https://github.com/complexorganizations/shadowsocks-manager)
+
+Are there any good alternative to self-hosting vpn?
+- [CloudFlare Warp](https://1.1.1.1/)
+
+Why is all the code in one place?
+- Consider a remote control, you can have thirty different remotes each doing a different job, or you may have a single remote that does everything.
 
 Official Links
 - Homepage: https://www.wireguard.com
