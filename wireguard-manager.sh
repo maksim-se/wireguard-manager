@@ -122,8 +122,8 @@ UNBOUND_CONFIG="${UNBOUND_ROOT}/unbound.conf"
 UNBOUND_ROOT_HINTS="${UNBOUND_ROOT}/root.hints"
 UNBOUND_ANCHOR="/var/lib/unbound/root.key"
 UNBOUND_ROOT_SERVER_CONFIG_URL="https://www.internic.net/domain/named.cache"
-UNBOUND_CONFIG_HOST_URL="https://raw.githubusercontent.com/complexorganizations/unbound-manager/main/configs/host"
-UNBOUND_CONFIG_HOST="/etc/unbound/unbound.conf.d/host.conf"
+UNBOUND_CONFIG_HOST_URL="https://raw.githubusercontent.com/complexorganizations/content-blocker/main/configs/hosts"
+UNBOUND_CONFIG_HOST="${UNBOUND_ROOT}/unbound.conf.d/host.conf"
 UNBOUND_CONFIG_HOST_TMP="/tmp/host"
 
 # Verify that it is an old installation or another installer
@@ -1503,14 +1503,6 @@ PublicKey = ${SERVER_PUBKEY}" >>${WIREGUARD_CLIENT_PATH}/"${NEW_CLIENT_NAME}"-${
               sed -i -e "s_.*_0.0.0.0 &_" ${UNBOUND_CONFIG_HOST_TMP}
               grep "^0\.0\.0\.0" "${UNBOUND_CONFIG_HOST_TMP}" | awk '{print "local-data: \""$2" IN A 0.0.0.0\""}' >"${UNBOUND_CONFIG_HOST}"
               rm -f ${UNBOUND_CONFIG_HOST_TMP}
-            fi
-            # unbound relaunch
-            if pgrep systemd-journal; then
-              systemctl reenable unbound
-              systemctl restart unbound
-            else
-              service unbound enable
-              service unbound restart
             fi
           fi
         fi
